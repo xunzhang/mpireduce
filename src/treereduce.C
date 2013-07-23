@@ -1,10 +1,11 @@
 #include <stdio.h>
 
 // not SPMD code
-int tree_reduce(const int rank_in, const int np, ...) {
+int tree_reduce(const int rank_in, const int np) {
   int rank = rank_in;
   int num = np;
   int isodd = 0;
+  int depth = 1;
   
   // many sends during a reduce process
   while(num > 1) {
@@ -36,7 +37,8 @@ int tree_reduce(const int rank_in, const int np, ...) {
 
 int main(void)
 {
-  int num, rank;
-  scanf("%d %d", &rank, &num);
+  int np, rank;
+  scanf("%d %d", &rank, &np);
+  tree_reduce(rank, np);
   return 0;
 }
